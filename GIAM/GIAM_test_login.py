@@ -6,11 +6,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 def test_prep(func):
-    def wrapper(a, b):
+    def wrapper(a, b, coin):
         driver = webdriver.Chrome()
         start_time = time.time()
         driver.get('https://qa.giam.finance/login')
-        element = WebDriverWait(driver, 10).until(ec.presence_of_element_located((By.TAG_NAME, "html")))
+        wait = WebDriverWait(driver, 600)
 
         login = driver.find_element(By.ID, 'username')
         login.clear()
@@ -22,7 +22,7 @@ def test_prep(func):
         pswd.send_keys(b)
 
         driver.find_element(By.CSS_SELECTOR, "button").click()
-        func(driver, login, pswd)
+        func(driver, login, pswd, coin)
         print("%s seconds " % (time.time() - start_time))
         driver.quit()
 
@@ -78,3 +78,4 @@ def test_empty_input(driver, login, pswd):
 # print(bool(test_empty_input('alex567da', '')))# Пустое поле пароль
 # print(bool(test_empty_input('', '')))# Оба поля пустые
 # print('END TESTS')
+
