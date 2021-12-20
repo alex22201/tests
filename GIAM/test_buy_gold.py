@@ -9,10 +9,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 def test_prep(func):
     def wrapper(driver, val, coin_list):
 
-        start_time = time.time()
         driver.get('https://qa.giam.finance/cabinet/invoices')
         wait = WebDriverWait(driver, 600)
-
         try:
             login = driver.find_element(By.ID, 'username')
             login.clear()
@@ -103,5 +101,8 @@ driver = webdriver.Chrome()
 # #6 Ввод пустого поля
 # val = ''
 # test_incorrect_gold_by(driver, val, coin_list)
+#
+# #7 Ввод точки '.'
+val = '.'
+test_incorrect_gold_by(driver, val, coin_list)
 driver.quit()
-
