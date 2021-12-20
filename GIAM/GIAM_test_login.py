@@ -19,6 +19,7 @@ def test_prep(func):
         pswd.clear()
 
         login.send_keys(a)
+
         pswd.send_keys(b)
 
         driver.find_element(By.CSS_SELECTOR, "button").click()
